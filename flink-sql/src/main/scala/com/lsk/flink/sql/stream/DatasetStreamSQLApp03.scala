@@ -51,9 +51,11 @@ object DatasetStreamSQLApp03 {
   class WordCountUpsertStreamTableSink(fieldNames: Array[String], fieldTypes: Array[DataType]) extends UpsertStreamTableSink[Row] {
 
     override def setKeyFields(keys: Array[String]): Unit = {
+      println("keys->" + keys.mkString(","))
     }
 
     override def setIsAppendOnly(isAppendOnly: lang.Boolean): Unit = {
+      println("isAppendOnly->" + isAppendOnly)
     }
 
     override def getRecordType: TypeInformation[Row] = {

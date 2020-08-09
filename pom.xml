@@ -29,6 +29,8 @@ under the License.
         <module>flink-state</module>
         <module>flink-watermark</module>
         <module>flink-sql</module>
+        <module>flink-kafka</module>
+        <module>flink-cep</module>
     </modules>
     <packaging>pom</packaging>
 
