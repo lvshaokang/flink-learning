@@ -46,8 +46,6 @@ object MySQLAsyncQueryApp01 {
     var dataSource: DruidDataSource = _
 
     override def open(parameters: Configuration): Unit = {
-
-
       // 创建连接池
       dataSource = new DruidDataSource()
       dataSource.setDriverClassName("com.mysql.jdbc.Driver")
