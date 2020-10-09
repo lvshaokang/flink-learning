@@ -38,6 +38,7 @@ object FlinkParameterToolExampleApp03 {
     env.execute(this.getClass.getSimpleName)
   }
 
+  // 推荐方式
   def createParameterTool(args:Array[String]): ParameterTool = {
     ParameterTool.fromPropertiesFile(classOf[Nothing].getResourceAsStream("/application.properties"))
       .mergeWith(ParameterTool.fromArgs(args))
