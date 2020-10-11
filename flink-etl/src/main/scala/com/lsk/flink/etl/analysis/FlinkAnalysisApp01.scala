@@ -29,7 +29,7 @@ object FlinkAnalysisApp01 {
 
     //    val stream = env.socketTextStream("localhost", 9999)
 
-    byUV(env)
+//    byUV(env)
 
     env.execute(this.getClass.getSimpleName)
   }
@@ -62,7 +62,7 @@ object FlinkAnalysisApp01 {
       }).print()
   }
 
-  def byUV(env: StreamExecutionEnvironment): Unit = {
+ /* def byUV(env: StreamExecutionEnvironment): Unit = {
     env.setParallelism(4)
     env.readTextFile("data/log.txt")
       .map(x => {
@@ -79,7 +79,7 @@ object FlinkAnalysisApp01 {
           out.collect(UVCount(new Timestamp(window.getEnd).toString,userIds.size))
         }
       }).print()
-  }
+  }*/
 
 
   case class AccessPage(userId: String, province: String, domain: String, ts: Long)

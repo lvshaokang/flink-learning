@@ -9,7 +9,7 @@ import scala.collection.immutable
 
 
 /**
- * 利用广播变量动态更新配置
+ * ParameterTool
  *
  * @author red
  * @class_name FlinkParameterToolExampleApp01
