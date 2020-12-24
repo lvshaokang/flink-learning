@@ -5,7 +5,6 @@ import org.apache.flink.streaming.api.TimeCharacteristic
 import org.apache.flink.streaming.api.functions.timestamps.BoundedOutOfOrdernessTimestampExtractor
 import org.apache.flink.streaming.api.scala.StreamExecutionEnvironment
 import org.apache.flink.streaming.api.windowing.time.Time
-import org.apache.flink.table.api.Slide
 import org.apache.flink.table.api.scala.{StreamTableEnvironment, _}
 import org.apache.flink.types.Row
 
