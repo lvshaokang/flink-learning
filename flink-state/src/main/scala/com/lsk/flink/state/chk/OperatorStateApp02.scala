@@ -60,7 +60,7 @@ object OperatorStateApp02 {
   }
   
   class AddFunction extends ReduceFunction[Long] {
-    override def reduce(value1: Long, value2: Long): Long = null
+    override def reduce(value1: Long, value2: Long): Long = 0l
   }
 
 }

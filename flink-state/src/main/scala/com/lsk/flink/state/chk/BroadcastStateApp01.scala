@@ -72,11 +72,11 @@ object BroadcastStateApp01 {
     
     override def serialize(element: Pattern): Array[Byte] = element.toString.getBytes(StandardCharsets.UTF_8)
     
-    override def deserialize(message: Array[Byte]): Action = JSON.parseObject(message, classOf[Pattern])
-    
     override def isEndOfStream(nextElement: Pattern): Boolean = false
     
     override def getProducedType: TypeInformation[Pattern] = createTypeInformation[Pattern]
+  
+    override def deserialize(message: Array[Byte]): Pattern = JSON.parseObject(message, classOf[Pattern])
   }
   
   class PatternEvaluator extends KeyedBroadcastProcessFunction[Long, Action, Pattern, (Long, Pattern)] {
