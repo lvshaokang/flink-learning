@@ -35,6 +35,7 @@ under the License.
         <module>flink-example</module>
         <module>cloud-music-example</module>
         <module>flink-etl</module>
+        <module>flink-common</module>
     </modules>
     <packaging>pom</packaging>
 

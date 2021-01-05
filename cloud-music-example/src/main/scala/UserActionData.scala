@@ -32,8 +32,14 @@ class BinLogDeserializer extends AbstractDeserializationSchema[BinLogData] {
   }
 }
 
-case class BinLogData(tableName: String, changeType: String, changeList: List[ColumnChange])
+case class BinLogData(tableName: String, changeType: String, changeList: List[ColumnChange]) {
+  override def toString: String = s"tableName=${tableName},\tchangeType=${changeType},\tchangeList=${changeList}"
+}
 
-case class ColumnChange(columnName: String, columnType: String, oldValue: String, newValue: String)
+case class ColumnChange(columnName: String, columnType: String, oldValue: String, newValue: String) {
+  override def toString: String = s"columnName=${columnName},\tcolumnType=${columnType},\toldValue=${oldValue},\tnewValue=${newValue}"
+}
 
-case class UserActionData(userId: Long, action: String, logTime: Int, props: JSONObject)
+case class UserActionData(userId: Long, action: String, logTime: Int, props: JSONObject) {
+  override def toString: String = s"userId=${userId},\taction=${action},\tlogTime=${logTime},\tprops=${props}"
+}
