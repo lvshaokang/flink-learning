@@ -2,6 +2,7 @@ package com.lsk.flink.state.chk
 
 import org.apache.flink.api.common.functions.FlatMapFunction
 import org.apache.flink.runtime.state.filesystem.FsStateBackend
+import org.apache.flink.runtime.state.memory.{MemoryStateBackend, MemoryStateBackendFactory}
 import org.apache.flink.streaming.api.CheckpointingMode
 import org.apache.flink.streaming.api.environment.CheckpointConfig
 import org.apache.flink.streaming.api.scala.StreamExecutionEnvironment
@@ -60,10 +61,9 @@ object ChkApp02 {
     env.getCheckpointConfig.enableExternalizedCheckpoints(CheckpointConfig.ExternalizedCheckpointCleanup.RETAIN_ON_CANCELLATION)
   
     //设置statebackend
-    env.setStateBackend(new FsStateBackend("file:///" + System.getProperty("user.dir") + "/flink-state/checkpoints/"))
-  
+//    env.setStateBackend(new FsStateBackend("file:///" + System.getProperty("user.dir") + "/flink-state/checkpoints/"))
+    env.setStateBackend(new MemoryStateBackend())
   }
-  
   case class WordWithCount(word: String, count: Long)
   
 }
