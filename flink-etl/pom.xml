@@ -71,6 +71,25 @@
             <version>1.2.72</version>
         </dependency>
 
+       <!-- <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>3.1.0</version>
+        </dependency>-->
+
+        <!-- https://mvnrepository.com/artifact/io.vertx/vertx-redis-client -->
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-redis-client</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-core</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+
     </dependencies>
 
     <repositories>
