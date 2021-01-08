@@ -63,7 +63,7 @@ object DimJoinApp02B {
         // map 中进行主表和维表的关联
         var cityName = ""
         if (cache.get(value._2) != null) {
-          cityName = cache(value._2)
+          cityName = cache.get(value._2)
         }
         (value._1, value._2, cityName)
       }
