@@ -1,3 +1,4 @@
+/*
 package com.lsk.bigdata.flink.join.dimjoin
 
 import org.apache.flink.api.common.functions.RichMapFunction
@@ -44,18 +45,19 @@ object DimJoinApp02A {
       var cache: LoadingCache[Int, String] = _
   
       override def open(parameters: Configuration): Unit = {
-        cache = CacheBuilder.newBuilder()
+        cache = CacheBuilder
+          .newBuilder()
           // 最多缓存个数,超过了就根据最近最少使用算法来移除缓存 LRU
           .maximumSize(1000)
           // 在更新后的指定时间后就回收
           .expireAfterWrite(10, TimeUnit.MINUTES)
           // 指定移除通知
-          .removalListener(new RemovalListener[Int, String] {
+          .removalListener[Int, String](new RemovalListener[Int, String] {
             override def onRemoval(removalNotification: RemovalNotification[Int, String]): Unit = {
               println(removalNotification.getKey + "被移除了,值为: " + removalNotification.getValue)
             }
           })
-          .build(new CacheLoader[Int, String] {
+          .build[Int, String](new CacheLoader[Int, String] {
             override def load(k: Int): String = {
               val cityName = readFromHBase(k)
               cityName
@@ -97,3 +99,4 @@ object DimJoinApp02A {
   }
   
 }
+*/

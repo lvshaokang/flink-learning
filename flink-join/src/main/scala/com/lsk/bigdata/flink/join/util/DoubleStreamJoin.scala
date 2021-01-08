@@ -1,3 +1,4 @@
+/*
 package com.lsk.bigdata.flink.join.util
 
 import com.alibaba.fastjson.JSON
@@ -110,7 +111,7 @@ object DoubleStreamJoin {
             smallState.update(smallOrder)
             // 1 分钟后触发定时器,当前的 eventTime + 60s
             val time = smallOrder.time + 60000
-            timerState.update(time =)
+            timerState.update(time)
             ctx.timerService().registerEventTimeTimer(time)
           }
         }
@@ -152,3 +153,4 @@ object DoubleStreamJoin {
   case class Order(time: Long, orderId: String, userId: String, goodsId: Int, price: Int, cityId: Int)
 
 }
+*/

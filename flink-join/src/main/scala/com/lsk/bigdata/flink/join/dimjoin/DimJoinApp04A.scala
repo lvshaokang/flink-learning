@@ -30,7 +30,7 @@ import org.apache.flink.types.Row
  * cityName String,
  * timestamp Long
  */
-object DimJoinApp04 {
+object DimJoinApp04A {
   
   def main(args: Array[String]): Unit = {
     val env = StreamExecutionEnvironment.getExecutionEnvironment
