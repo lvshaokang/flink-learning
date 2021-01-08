@@ -1,10 +1,10 @@
-/*
 package com.lsk.bigdata.flink.join.dimjoin
 
 import org.apache.flink.api.common.functions.RichMapFunction
 import org.apache.flink.configuration.Configuration
 import org.apache.flink.shaded.guava18.com.google.common.cache.{CacheBuilder, CacheLoader, LoadingCache, RemovalListener, RemovalNotification}
 import org.apache.flink.streaming.api.scala.{StreamExecutionEnvironment, _}
+import org.apache.flink.table.api.scala._
 
 import java.util.concurrent.TimeUnit
 
@@ -29,40 +29,34 @@ import java.util.concurrent.TimeUnit
  * timestamp Long
  */
 object DimJoinApp02A {
-  
+
   def main(args: Array[String]): Unit = {
     val env = StreamExecutionEnvironment.getExecutionEnvironment
-  
+
     val baseStream = env.socketTextStream("localhost", 9000, '\n')
       .map(line => {
         val splits = line.split(",")
         // userName, cityId
         (splits(0), splits(1).toInt)
       })
-  
-    val joinStream = baseStream.map(new RichMapFunction[(String,Int), (String, Int, String)] {
+
+    val joinStream = baseStream.map(new RichMapFunction[(String, Int), (String, Int, String)] {
       // <cityId, cityName>
-      var cache: LoadingCache[Int, String] = _
+      var cache: LoadingCache[Integer, String] = _
   
       override def open(parameters: Configuration): Unit = {
-        cache = CacheBuilder
-          .newBuilder()
+        cache = CacheBuilder.newBuilder()
           // 最多缓存个数,超过了就根据最近最少使用算法来移除缓存 LRU
           .maximumSize(1000)
           // 在更新后的指定时间后就回收
           .expireAfterWrite(10, TimeUnit.MINUTES)
-          // 指定移除通知
-          .removalListener[Int, String](new RemovalListener[Int, String] {
-            override def onRemoval(removalNotification: RemovalNotification[Int, String]): Unit = {
+          .removalListener(new RemovalListener[Integer, String] {
+            override def onRemoval(removalNotification: RemovalNotification[Integer, String]): Unit = {
               println(removalNotification.getKey + "被移除了,值为: " + removalNotification.getValue)
             }
-          })
-          .build[Int, String](new CacheLoader[Int, String] {
-            override def load(k: Int): String = {
-              val cityName = readFromHBase(k)
-              cityName
-            }
-          })
+          }).build[Integer, String](new CacheLoader[Integer, String] {
+          override def load(k: Integer): String = readFromHBase(k)
+        })
       }
   
       override def map(value: (String, Int)): (String, Int, String) = {
@@ -74,9 +68,9 @@ object DimJoinApp02A {
         (value._1, value._2, cityName)
       }
     })
-    
+
     joinStream.print()
-    
+
     env.execute(this.getClass.getSimpleName)
   }
 
@@ -97,6 +91,5 @@ object DimJoinApp02A {
 
     cityName
   }
-  
+
 }
-*/

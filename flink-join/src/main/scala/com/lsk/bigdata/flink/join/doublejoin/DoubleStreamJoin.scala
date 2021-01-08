@@ -1,4 +1,3 @@
-/*
 package com.lsk.bigdata.flink.join.util
 
 import com.alibaba.fastjson.JSON
@@ -14,7 +13,7 @@ import org.apache.flink.util.Collector
 import org.apache.flink.streaming.api.scala._
 
 /**
- * TODO: 
+ * TODO:
  *
  * @author red
  * @class_name DoubleStreamJoin
@@ -153,4 +152,3 @@ object DoubleStreamJoin {
   case class Order(time: Long, orderId: String, userId: String, goodsId: Int, price: Int, cityId: Int)
 
 }
-*/
