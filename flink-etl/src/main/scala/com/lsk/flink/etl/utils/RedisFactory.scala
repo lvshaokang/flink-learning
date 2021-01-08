@@ -5,7 +5,8 @@ import redis.clients.jedis.{HostAndPort, Jedis}
 object RedisFactory {
   
   private lazy val jedisCluster: Jedis = {
-    new Jedis(new HostAndPort("localhost", 6379))
+    val jedis = new Jedis("localhost", 6379)
+    jedis
   }
   
 }

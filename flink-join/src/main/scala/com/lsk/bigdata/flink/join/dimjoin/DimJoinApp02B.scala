@@ -1,7 +1,6 @@
-/*
 package com.lsk.bigdata.flink.join.dimjoin
 
-import com.github.benmanes.caffeine.cache.{Caffeine, LoadingCache, RemovalCause, RemovalListener}
+import com.github.benmanes.caffeine.cache.{CacheLoader, Caffeine, LoadingCache, RemovalCause, RemovalListener}
 import org.apache.flink.api.common.functions.RichMapFunction
 import org.apache.flink.configuration.Configuration
 import org.apache.flink.streaming.api.scala.{StreamExecutionEnvironment, _}
@@ -42,7 +41,7 @@ object DimJoinApp02B {
   
     val joinStream = baseStream.map(new RichMapFunction[(String,Int), (String, Int, String)] {
       // <cityId, cityName>
-      var cache: LoadingCache[Int, String] = _
+      var cache: LoadingCache[Integer, String] = _
   
       override def open(parameters: Configuration): Unit = {
   
@@ -51,12 +50,14 @@ object DimJoinApp02B {
           // 在更新后的指定时间后就回收
           .expireAfterWrite(10, TimeUnit.MINUTES)
           // 指定移除通知
-          .removalListener((key: Int, value: String, cause: RemovalCause) => {
+          .removalListener((key: Integer, value: String, cause: RemovalCause) => {
             println(s"key=${key}被移除了,value=${value},cause=${cause}")
           })
-          .build[Int, String]((k: Int) => {
-            val cityName = readFromHBase(k)
-            cityName
+          .build[Integer, String](new CacheLoader[Integer, String] {
+            override def load(key: Integer): String = {
+              val cityName = readFromHBase(key)
+              cityName
+            }
           })
       }
   
@@ -94,4 +95,3 @@ object DimJoinApp02B {
   }
   
 }
-*/

@@ -41,7 +41,7 @@ object FlinkApp01 {
         if (binLogData.changeType != "INSERT") {
           null
         }
-        var userId: Long = null
+        var userId: java.lang.Long = null
         var targetData: String = null
 
         if (binLogData.tableName == "Music_FansContributionRecord") {
