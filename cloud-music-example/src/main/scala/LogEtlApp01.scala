@@ -17,7 +17,7 @@ import scala.collection.JavaConversions._
  * @class_name FlinkApp01
  * @date 2020-11-29
  */
-object FlinkApp01 {
+object LogEtlApp01 {
   def main(args: Array[String]): Unit = {
     val prop = new Properties()
     prop.put("bootstrap.servers", "localhost:9092")
